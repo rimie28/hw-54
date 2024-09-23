@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Board from "./Board.tsx";
 
 const createItems = () => {
     const items = [];
@@ -19,15 +20,15 @@ const App = () => {
 
     const clickOnItem = (index) => {
             if(items[index].clicked) {
-                return items;
+                return;
             }
             const newState = [...items];
-            newState[index].clicked = true;
+            newState[index] = {...newState[index], clicked: true};
             setItems(newState);
 
             setTries(tries + 1);
             }
-            
+
 
     const reset = () => {
         setItems(createItems());
@@ -36,6 +37,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <Board items={items} clickOnItem={clickOnItem}/>
             <p>Tries: {tries}</p>
             <button onClick={reset}>Reset</button>
         </div>
