@@ -14,6 +14,32 @@ const createItems = () => {
 };
 
 const App = () => {
+    const [items, setItems] = useState(createItems());
+    const [tries, setTries] = useState(0);
+
+    const clickOnItem = (index) => {
+            if(items[index].clicked) {
+                return items;
+            }
+            const newState = [...items];
+            newState[index].clicked = true;
+            setItems(newState);
+
+            setTries(tries + 1);
+            }
+            
+
+    const reset = () => {
+        setItems(createItems());
+        setTries(0);
+    };
+
+    return (
+        <div className="App">
+            <p>Tries: {tries}</p>
+            <button onClick={reset}>Reset</button>
+        </div>
+    )
 };
 
 export default App
